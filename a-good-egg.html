@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Good Egg — Supported Family Building</title>
+<style>
+  :root{
+    --ink:#14150f; --ink-2:#1e2018; --paper:#f5f1e6; --paper-2:#fbf9f2;
+    --gold:#b79657; --gold-2:#dcc48d; --sage:#7f8d6c; --sage-2:#9fae86;
+    --line:rgba(245,241,230,.13); --muted:#aca695;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--paper);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4,.serif{font-family:"Georgia","Times New Roman",serif;font-weight:400;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-size:12px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2)}
+  .btn{display:inline-block;padding:14px 30px;border-radius:2px;font-size:13px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;transition:.2s}
+  .btn-gold{background:var(--gold);color:var(--ink);border:1px solid var(--gold)}
+  .btn-gold:hover{background:var(--gold-2);border-color:var(--gold-2)}
+  .btn-ghost{border:1px solid var(--line);color:var(--paper)}
+  .btn-ghost:hover{border-color:var(--gold-2);color:var(--gold-2)}
+
+  header{position:sticky;top:0;z-index:50;background:rgba(20,21,15,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:Georgia,serif;font-size:22px;letter-spacing:.02em}
+  .logo .mark{width:30px;height:38px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(160deg,var(--gold-2),var(--gold));display:inline-block}
+  .toggle{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+  .toggle button{background:transparent;color:var(--muted);border:0;padding:10px 20px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:.2s;font-family:inherit}
+  .toggle button.active{background:var(--gold);color:var(--ink)}
+  .navlinks{display:flex;gap:28px;font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+  .navlinks a:hover{color:var(--gold-2)}
+
+  section{padding:92px 0}
+  .hero{padding:116px 0 100px;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:58px;line-height:1.09;max-width:16ch}
+  .hero p.lede{font-size:20px;color:var(--muted);max-width:54ch;margin:28px 0 40px;line-height:1.7}
+  .hero .cta-row{display:flex;gap:16px;flex-wrap:wrap}
+  .trust{margin-top:60px;display:flex;gap:44px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:12px;letter-spacing:.15em;text-transform:uppercase}
+  .trust b{color:var(--paper);font-family:Georgia,serif;font-size:28px;display:block;letter-spacing:0;text-transform:none}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+  .card{background:var(--ink-2);border:1px solid var(--line);border-radius:4px;padding:34px}
+  .card h3{font-size:22px;margin-bottom:12px}
+  .card p{color:var(--muted);font-size:15px}
+  .icn{width:44px;height:44px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold-2);margin-bottom:22px;font-family:Georgia,serif;font-size:20px}
+
+  .section-head{max-width:62ch;margin-bottom:52px}
+  .section-head h2{font-size:40px;line-height:1.15;margin:14px 0}
+  .section-head p{color:var(--muted);font-size:17px}
+
+  /* Problem / market strip */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .stat{border-top:1px solid var(--gold);padding-top:22px}
+  .stat b{font-family:Georgia,serif;font-size:46px;display:block;line-height:1}
+  .stat span{color:var(--muted);font-size:14.5px;display:block;margin-top:12px}
+
+  .criteria{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .crit{background:var(--ink-2);padding:26px 22px}
+  .crit .k{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold-2);margin-bottom:10px}
+  .crit .v{font-family:Georgia,serif;font-size:17px;line-height:1.4}
+  .crit small{display:block;color:var(--muted);font-size:12.5px;margin-top:8px;letter-spacing:0}
+
+  .profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pf{background:var(--paper-2);color:var(--ink);border-radius:6px;overflow:hidden}
+  .pf .top{padding:22px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(20,21,15,.1)}
+  .pf .code{font-family:Georgia,serif;font-size:19px}
+  .pf .score{background:var(--sage);color:#fff;font-size:12px;letter-spacing:.08em;padding:5px 11px;border-radius:2px}
+  .pf .body{padding:22px 24px}
+  .pf .attr{display:flex;justify-content:space-between;font-size:13.5px;padding:7px 0;border-bottom:1px solid rgba(20,21,15,.07)}
+  .pf .attr:last-child{border-bottom:0}
+  .pf .attr span:first-child{color:#6c675b}
+  .pf .attr span:last-child{font-weight:600}
+  .pf .foot{padding:16px 24px;background:rgba(20,21,15,.04);font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;color:#8a8474;text-align:center}
+  .pill{display:inline-block;background:rgba(127,141,108,.18);color:#4e5a3c;font-size:11px;letter-spacing:.06em;padding:3px 9px;border-radius:2px;margin:2px 3px 0 0}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .step{padding-top:24px;border-top:1px solid var(--gold)}
+  .step .n{font-family:Georgia,serif;color:var(--gold-2);font-size:14px;letter-spacing:.2em}
+  .step h4{font-size:20px;margin:12px 0 8px}
+  .step p{color:var(--muted);font-size:14px}
+
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .tier{border:1px solid var(--line);border-radius:6px;padding:38px 32px;background:var(--ink-2)}
+  .tier.feature{border-color:var(--gold);background:linear-gradient(180deg,rgba(183,150,87,.08),transparent)}
+  .tier .name{font-family:Georgia,serif;font-size:26px;margin-bottom:6px}
+  .tier .price{font-size:14px;color:var(--gold-2);letter-spacing:.04em;margin-bottom:24px}
+  .tier ul{list-style:none;font-size:14.5px}
+  .tier li{padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted)}
+  .tier li::before{content:"—  ";color:var(--gold)}
+
+  .quote{max-width:46ch;margin:0 auto;text-align:center}
+  .quote p{font-family:Georgia,serif;font-size:29px;line-height:1.42}
+  .quote .who{margin-top:26px;color:var(--gold-2);font-size:12px;letter-spacing:.17em;text-transform:uppercase}
+
+  /* Business model band */
+  .model{background:var(--ink-2)}
+  .model .row{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+  .model ul{list-style:none;margin-top:20px}
+  .model li{padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;font-size:15px}
+  .model li b{font-family:Georgia,serif;color:var(--gold-2);white-space:nowrap}
+  .ask{background:var(--gold);color:var(--ink);border-radius:6px;padding:38px}
+  .ask h3{font-size:26px;margin-bottom:10px}
+  .ask .big{font-family:Georgia,serif;font-size:42px;line-height:1;margin:14px 0}
+  .ask p{font-size:14.5px;opacity:.82}
+
+  footer{border-top:1px solid var(--line);padding:56px 0;color:var(--muted);font-size:12.5px}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px}
+  .disclaimer{margin-top:40px;font-size:11px;color:#726d5f;max-width:92ch;line-height:1.7;letter-spacing:.02em}
+  .hidden{display:none}
+  .center{text-align:center}.mt{margin-top:44px}
+  @media(max-width:900px){
+    .hero h1{font-size:40px}
+    .grid3,.grid2,.profiles,.criteria,.steps,.tiers,.stat-row,.model .row{grid-template-columns:1fr}
+    .navlinks{display:none}.wrap{padding:0 20px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark"></span> A Good Egg</div>
+    <nav class="navlinks" id="navlinks"></nav>
+    <div class="toggle">
+      <button id="tab-p" class="active" onclick="setView('parent')">Intended Parents</button>
+      <button id="tab-g" onclick="setView('guardian')">Carrier–Guardians</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INTENDED PARENT VIEW ============ -->
+<main id="view-parent">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Supported family building · Private &amp; screened</div>
+      <h1>A trusted way to grow your family, beyond a single household.</h1>
+      <p class="lede">A Good Egg is a managed marketplace connecting intended parents with rigorously screened Carrier–Guardians who carry and raise a child in a stable, well-resourced home — under transparent, counsel-reviewed agreements from the very first conversation.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#how">See how it works</a>
+        <a class="btn btn-ghost" href="#criteria">Our screening standards</a>
+      </div>
+      <div class="trust">
+        <div><b>1,400+</b> screened carriers</div>
+        <div><b>38</b> jurisdictions supported</div>
+        <div><b>7-stage</b> vetting process</div>
+        <div><b>96%</b> match satisfaction</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">The proposition</div>
+        <h2>One managed service for matching, diligence, and stewardship.</h2>
+        <p>We bring verified screening, structured agreements, and long-term family support into a single, discreet service — for families whose ambitions extend beyond a single household.</p>
+      </div>
+      <div class="grid3">
+        <div class="card"><div class="icn">✦</div><h3>Curated matching</h3><p>Every carrier is pre-screened against your stated priorities — values, health, temperament, and location — before a profile ever reaches you.</p></div>
+        <div class="card"><div class="icn">⚖</div><h3>Transparent terms</h3><p>Support schedules, custody, contact cadence, and milestones are documented and independently counsel-reviewed in every jurisdiction we serve.</p></div>
+        <div class="card"><div class="icn">◈</div><h3>Discretion by design</h3><p>Coded profiles, staged disclosure, and layered confidentiality. Identities are revealed only by mutual, informed consent.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="criteria">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Screening standards</div>
+        <h2>Eight dimensions, independently verified.</h2>
+        <p>Set the priorities that matter to your family. Carriers advance only when every dimension is confirmed by a third party — and every step is consented to on both sides.</p>
+      </div>
+      <div class="criteria">
+        <div class="crit"><div class="k">Health screening</div><div class="v">Comprehensive panel<small>Medical history, carrier status, hereditary risk</small></div></div>
+        <div class="crit"><div class="k">Background</div><div class="v">Education &amp; record<small>Credential verification, references, checks</small></div></div>
+        <div class="crit"><div class="k">Wellbeing</div><div class="v">Lifestyle &amp; fitness<small>General health, activity, no dependency history</small></div></div>
+        <div class="crit"><div class="k">Psychological</div><div class="v">Readiness assessment<small>Clinical evaluation, resilience, support network</small></div></div>
+        <div class="crit"><div class="k">Family history</div><div class="v">Reproductive profile<small>Prior outcomes, generational health context</small></div></div>
+        <div class="crit"><div class="k">Parenting intent</div><div class="v">Committed to raise<small>Full-time parenting, not carriage alone</small></div></div>
+        <div class="crit"><div class="k">Privacy</div><div class="v">Confidentiality tier<small>Disclosure preferences, agreed boundaries</small></div></div>
+        <div class="crit"><div class="k">Geography</div><div class="v">Placement fit<small>Preferred regions, schooling, community</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">Sample matches</div><h2>How your shortlist appears.</h2><p>Illustrative, anonymized profiles. Identities and full details are shared only after mutual selection and signed agreements.</p></div>
+      <div class="profiles">
+        <div class="pf">
+          <div class="top"><div class="code">Carrier · A-207</div><div class="score">Match 96</div></div>
+          <div class="body">
+            <div class="attr"><span>Education</span><span>Graduate, STEM</span></div>
+            <div class="attr"><span>Health panel</span><span>Cleared</span></div>
+            <div class="attr"><span>Lifestyle</span><span>Active, non-smoker</span></div>
+            <div class="attr"><span>Parenting intent</span><span>Full-time</span></div>
+            <div class="attr"><span>Location</span><span>Flexible</span></div>
+            <div style="margin-top:12px"><span class="pill">Discreet</span><span class="pill">Relocatable</span><span class="pill">Multilingual</span></div>
+          </div>
+          <div class="foot">Details sealed · Tier I confidentiality</div>
+        </div>
+        <div class="pf">
+          <div class="top"><div class="code">Carrier · B-114</div><div class="score">Match 93</div></div>
+          <div class="body">
+            <div class="attr"><span>Education</span><span>Graduate, business</span></div>
+            <div class="attr"><span>Health panel</span><span>Cleared</span></div>
+            <div class="attr"><span>Lifestyle</span><span>Endurance athlete</span></div>
+            <div class="attr"><span>Parenting intent</span><span>Full-time</span></div>
+            <div class="attr"><span>Location</span><span>Rural, settled</span></div>
+            <div style="margin-top:12px"><span class="pill">Home-based</span><span class="pill">Education-focused</span></div>
+          </div>
+          <div class="foot">Details sealed · Tier I confidentiality</div>
+        </div>
+        <div class="pf">
+          <div class="top"><div class="code">Carrier · C-051</div><div class="score">Match 91</div></div>
+          <div class="body">
+            <div class="attr"><span>Education</span><span>Undergraduate, arts</span></div>
+            <div class="attr"><span>Health panel</span><span>Cleared</span></div>
+            <div class="attr"><span>Lifestyle</span><span>Active, non-smoker</span></div>
+            <div class="attr"><span>Parenting intent</span><span>Full-time</span></div>
+            <div class="attr"><span>Location</span><span>Metro, settled</span></div>
+            <div style="margin-top:12px"><span class="pill">Multigenerational home</span><span class="pill">Discreet</span></div>
+          </div>
+          <div class="foot">Details sealed · Tier I confidentiality</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="background:var(--ink-2)">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">How it works</div><h2>From first conversation to a supported family.</h2></div>
+      <div class="steps">
+        <div class="step"><div class="n">01</div><h4>Consultation</h4><p>A private intake to understand your priorities, timeline, and the family you envision.</p></div>
+        <div class="step"><div class="n">02</div><h4>Curated matches</h4><p>Anonymized carrier profiles, ranked to your criteria, with full screening dossiers.</p></div>
+        <div class="step"><div class="n">03</div><h4>Agreement</h4><p>Terms, support, and custody are drafted and independently counsel-reviewed on both sides.</p></div>
+        <div class="step"><div class="n">04</div><h4>Stewardship</h4><p>Ongoing coordination and milestone reporting for the life of the arrangement.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">Engagement</div><h2>Transparent, retainer-based pricing.</h2><p>A single annual retainer covers matching, diligence, and legal orchestration. Support to carriers is structured separately and held in trust.</p></div>
+      <div class="tiers">
+        <div class="tier"><div class="name">Single</div><div class="price">From $250k / placement</div><ul><li>One curated match</li><li>Full 7-stage screening</li><li>Standard terms drafting</li><li>Quarterly milestone reports</li></ul><a class="btn btn-ghost mt" href="#">Enquire</a></div>
+        <div class="tier feature"><div class="name">Family</div><div class="price">From $1.2M / year</div><ul><li>Up to five concurrent placements</li><li>Priority carrier access</li><li>Dedicated diligence counsel</li><li>Health-diversity guidance</li><li>Private stewardship office</li></ul><a class="btn btn-gold mt" href="#">Request consultation</a></div>
+        <div class="tier"><div class="name">Bespoke</div><div class="price">By arrangement</div><ul><li>Unlimited placements</li><li>Multi-jurisdiction structuring</li><li>Trust &amp; estate integration</li><li>24/7 family concierge</li></ul><a class="btn btn-ghost mt" href="#">Speak with a partner</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="quote">
+        <p>“For the first time, the whole process felt organized, transparent, and humane — for everyone involved.”</p>
+        <div class="who">— Intended parent · Verified client</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ CARRIER–GUARDIAN VIEW ============ -->
+<main id="view-guardian" class="hidden">
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">For carrier–guardians · Now accepting applications</div>
+      <h1>Raise a child in a home you build, fully supported.</h1>
+      <p class="lede">A Good Egg pairs exceptional carriers with committed intended parents who invest in the family you'll raise — with lifelong support, a home of your choosing, comprehensive care, and terms agreed transparently, on your own terms.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#apply">Start your application</a>
+        <a class="btn btn-ghost" href="#offer">What's provided</a>
+      </div>
+      <div class="trust">
+        <div><b>Lifelong</b> support structure</div>
+        <div><b>You</b> keep custody</div>
+        <div><b>Private</b> &amp; protected</div>
+        <div><b>93%</b> would recommend</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="offer">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">What's provided</div>
+        <h2>Everything a thriving family needs, structured and secured.</h2>
+        <p>Your role is to be the parent you already are. We put the resources and stability in place so the ground beneath you is solid.</p>
+      </div>
+      <div class="grid3">
+        <div class="card"><div class="icn">⌂</div><h3>A home, secured</h3><p>Housing in the community you choose, held in your name where the law allows — room to grow, roots that stay put.</p></div>
+        <div class="card"><div class="icn">✎</div><h3>Education, funded</h3><p>From early learning through university, a dedicated trust follows the child — with continuing-education support for you.</p></div>
+        <div class="card"><div class="icn">✚</div><h3>Health, covered</h3><p>Comprehensive medical, dental, and wellness coverage for you and the child, including full prenatal and postnatal care.</p></div>
+        <div class="card"><div class="icn">$</div><h3>Guaranteed support</h3><p>Generous monthly support indexed to cost of living, held in trust and paid on schedule — agreed in advance, no surprises.</p></div>
+        <div class="card"><div class="icn">♁</div><h3>A real community</h3><p>Retreats, peer circles, and 24/7 family concierge. You're joining a supported network, not going it alone.</p></div>
+        <div class="card"><div class="icn">◈</div><h3>Privacy, protected</h3><p>Your identity is shielded as firmly as theirs. You decide what's shared, when, and with whom.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--ink-2)">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">What we look for</div><h2>You may already be a fit.</h2><p>We're looking for warm, capable, grounded people who'd welcome the chance to raise a child with real resources and a real support system behind them.</p></div>
+      <div class="grid2">
+        <div class="card"><h3>Health &amp; stability</h3><p>Good general health and a dependable life. We cover the full medical screening — you bring the character and consistency.</p></div>
+        <div class="card"><h3>Warmth &amp; commitment</h3><p>A genuine wish to raise a child full-time in a loving, present home. This is supported parenthood, agreed openly on both sides.</p></div>
+        <div class="card"><h3>Curiosity &amp; drive</h3><p>Ambition for yourself and the child — academics, athletics, or the arts. You want them, and you, to reach far.</p></div>
+        <div class="card"><h3>Discretion</h3><p>Comfort keeping your arrangement private. In return, we protect your name and your family as carefully as theirs.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="apply">
+    <div class="wrap">
+      <div class="section-head"><div class="eyebrow">The path</div><h2>Four steps to a supported start.</h2></div>
+      <div class="steps">
+        <div class="step"><div class="n">01</div><h4>Apply</h4><p>A short, confidential application — fifteen minutes, no obligation, fully private.</p></div>
+        <div class="step"><div class="n">02</div><h4>Get to know us</h4><p>Health and readiness screening, all costs covered, plus a conversation with your carrier advisor.</p></div>
+        <div class="step"><div class="n">03</div><h4>Match on your terms</h4><p>Review anonymized intended parents and set your own conditions. Nothing proceeds without your yes.</p></div>
+        <div class="step"><div class="n">04</div><h4>Build your family</h4><p>Terms are signed, support begins, and your new chapter starts — with a team behind you the whole way.</p></div>
+      </div>
+      <div class="center mt"><a class="btn btn-gold" href="#">Start your application</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="quote">
+        <p>“I got the home, the security, and the family I always wanted — and I'm the one raising them. It never felt like giving anything up.”</p>
+        <div class="who">— Carrier–guardian, three years · Pacific Northwest</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="logo" style="font-size:18px"><span class="mark" style="width:22px;height:28px"></span> A Good Egg</div>
+      <div>Screened · Structured · Supported</div>
+      <div>Consultations by request</div>
+    </div>
+    <p class="disclaimer">Concept demo prepared for a pitch competition. “A Good Egg” is an illustrative product concept; figures, profiles, and testimonials are representative placeholders and not actual data. Nothing here constitutes medical, legal, or financial advice, or an offer of services.</p>
+  </div>
+</footer>
+
+<script>
+  var navP='<a href="#criteria">Standards</a><a href="#how">How it works</a><a href="#">Pricing</a>';
+  var navG='<a href="#offer">What\'s provided</a><a href="#apply">How it works</a><a href="#">Stories</a>';
+  function setView(v){
+    var p=document.getElementById('view-parent'), g=document.getElementById('view-guardian');
+    var tp=document.getElementById('tab-p'), tg=document.getElementById('tab-g');
+    var nav=document.getElementById('navlinks');
+    if(v==='parent'){p.classList.remove('hidden');g.classList.add('hidden');tp.classList.add('active');tg.classList.remove('active');nav.innerHTML=navP;}
+    else{g.classList.remove('hidden');p.classList.add('hidden');tg.classList.add('active');tp.classList.remove('active');nav.innerHTML=navG;}
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  document.getElementById('navlinks').innerHTML=navP;
+</script>
+</body>
+</html>
