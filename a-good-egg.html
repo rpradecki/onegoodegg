@@ -91,6 +91,14 @@
   .tier li{padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted)}
   .tier li::before{content:"—  ";color:var(--gold)}
 
+  /* Add-ons */
+  .addons{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .addon{background:var(--ink-2);padding:20px 22px;display:flex;justify-content:space-between;gap:18px;align-items:baseline}
+  .addon .n{font-family:Georgia,serif;font-size:16px}
+  .addon small{display:block;color:var(--muted);font-size:12.5px;margin-top:4px}
+  .addon .p{color:var(--gold-2);font-family:Georgia,serif;font-size:15px;white-space:nowrap}
+  .note{color:var(--muted);font-size:13px;margin-top:18px;font-style:italic}
+
   /* Testimonial */
   .quote{max-width:44ch;margin:0 auto;text-align:center}
   .quote p{font-family:Georgia,serif;font-size:30px;line-height:1.4}
@@ -225,11 +233,29 @@
 
   <section id="tiers" style="background:var(--ink-2)">
     <div class="wrap">
-      <div class="section-head"><div class="eyebrow">Engagement</div><h2>Structured for scale.</h2><p>Annual retainers cover matching, diligence, legal orchestration, and ongoing stewardship. Support to Guardians is arranged separately and privately.</p></div>
+      <div class="section-head"><div class="eyebrow">Engagement</div><h2>One buy-in. A decade of continuation.</h2><p>Every placement is a flat $1M buy-in — covering matching, diligence, legal orchestration, and ten full years of Guardian and child support. Commission as many as your legacy requires.</p></div>
       <div class="tiers">
-        <div class="tier"><div class="name">Scion</div><div class="price">From $250k / placement</div><ul><li>Single curated match</li><li>7-stage screening dossier</li><li>Standard terms drafting</li><li>Quarterly milestone reports</li></ul><a class="btn btn-ghost mt" href="#">Enquire</a></div>
-        <div class="tier feature"><div class="name">Lineage</div><div class="price">From $1.2M / year</div><ul><li>Up to five concurrent placements</li><li>Priority Guardian access</li><li>Dedicated diligence counsel</li><li>Genetic-diversity mapping</li><li>Private stewardship office</li></ul><a class="btn btn-gold mt" href="#">Request introduction</a></div>
+        <div class="tier feature"><div class="name">Single placement</div><div class="price">$1M / delivery</div><ul><li>One curated Guardian match</li><li>7-stage screening dossier</li><li>Legal orchestration &amp; terms</li><li>Ten years of full support</li><li>Quarterly milestone reports</li></ul><a class="btn btn-gold mt" href="#">Request introduction</a></div>
+        <div class="tier"><div class="name">Portfolio</div><div class="price">From $4.5M · five deliveries</div><ul><li>Five concurrent placements</li><li>Priority Guardian access</li><li>Genetic-diversity mapping</li><li>Dedicated diligence counsel</li><li>Private stewardship office</li></ul><a class="btn btn-ghost mt" href="#">Enquire</a></div>
         <div class="tier"><div class="name">Dynasty</div><div class="price">By arrangement</div><ul><li>Unlimited placements</li><li>Global geographic spread</li><li>Multi-jurisdiction structuring</li><li>Trust &amp; estate integration</li><li>24/7 legacy concierge</li></ul><a class="btn btn-ghost mt" href="#">Speak with a partner</a></div>
+      </div>
+
+      <div style="margin-top:68px">
+        <div class="eyebrow">Optional enhancements</div>
+        <h3 class="serif" style="font-size:26px;margin:12px 0 26px">Curate the outcome.</h3>
+        <div class="addons">
+          <div class="addon"><div><div class="n">IVF cycle &amp; embryo creation</div><small>Retrieval, fertilization, culture to blastocyst</small></div><div class="p">$35k / cycle</div></div>
+          <div class="addon"><div><div class="n">Embryo genetic screening</div><small>PGT-A / PGT-M across the full cohort</small></div><div class="p">$12k</div></div>
+          <div class="addon"><div><div class="n">Complexion &amp; phenotype selection</div><small>Skin tone, build, and presentation</small></div><div class="p">$85k</div></div>
+          <div class="addon"><div><div class="n">Eye &amp; hair profile</div><small>Color and texture preference weighting</small></div><div class="p">$45k</div></div>
+          <div class="addon"><div><div class="n">Sex selection</div><small>Guaranteed, single-embryo transfer</small></div><div class="p">$40k</div></div>
+          <div class="addon"><div><div class="n">Polygenic trait optimization</div><small>Height, longevity, cognitive-index scoring</small></div><div class="p">By arrangement</div></div>
+          <div class="addon"><div><div class="n">Multiples</div><small>Twin transfer, single delivery</small></div><div class="p">$250k</div></div>
+          <div class="addon"><div><div class="n">Expedited matching</div><small>Curated shortlist within 90 days</small></div><div class="p">$60k</div></div>
+          <div class="addon"><div><div class="n">Extended support</div><small>Each additional five years beyond the ten</small></div><div class="p">$500k</div></div>
+          <div class="addon"><div><div class="n">Tier 0 confidentiality</div><small>Sealed records, off-ledger structuring</small></div><div class="p">$120k</div></div>
+        </div>
+        <p class="note">Enhancements are added to any placement. Buy-in and support are held in trust and disbursed to the Guardian on schedule.</p>
       </div>
     </div>
   </section>
